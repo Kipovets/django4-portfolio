@@ -1,0 +1,34 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Моё портфолио{% endblock title %}
+
+{% block content %}
+{% load static %}
+<div class="row justify-content-center my-3">
+    <div class="col-5">
+        <img src="{% static 'portfolio/IMG_20220709_150046.jpg' %}" class="img-fluid">
+    </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+    <div class="col-md-9 text-center">
+        <h1 id="hometext" class="font-weight-bold">Kipovets потому, что 16 лет жизни - КИПовец. <br> А теперь я - программист Kipovets =)<br>Начать не поздно и в 36, главное - всегда двигаться вперёд!</h1>
+    </div>
+</div>
+<h1 class="mt-5 text-center">Портфолио</h1>
+<hr>
+<div class="row">
+    {% for project in projects %}
+        <div class="col-lg-4 col-md-6 content-center">
+            {% if project.url %}
+            <a href="{{ project.url }}">
+                <img src="{{ project.image.url }}" class="img-fluid mb-2">
+             </a>
+            {% else %}
+                <img src="{{ project.image.url }}" class="img-fluid mb-2">
+            {% endif %}
+            <h4 class="mt-5 text-center">{{ project.title }}</h4>
+            <p class="mt-5 text-center">{{ project.description }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

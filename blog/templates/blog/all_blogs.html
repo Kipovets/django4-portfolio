@@ -1,0 +1,27 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}Мой блог{% endblock title %}
+{% block content %}
+<div class="container text-center">
+    <div class="mt-5">
+        <h1>Kipovets блог</h1>
+        {% if posts.count == 2 or posts.count == 3 or posts.count == 4 or posts.count == 22 or posts.count == 23 or posts.count == 24 %}
+            <h5>В блоге {{ posts.count }} поста</h5>
+        {% elif posts.count == 1 or posts.count == 21 %}
+            <h5>В блоге {{ posts.count }} пост</h5>
+        {% else %}
+            <h5>В блоге {{ posts.count }} постов</h5>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="mt-5">
+        {% for post in posts %}
+            <a href="{% url 'blog:detail' post.id %}"><h3>{{ post.title }}</h3></a>
+            <h6>{{ post.data|date:'d N Y H:i' }}</h6>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" height=280 width=400>
+            {% endif %}
+            <p class="mb-5">{{ post.description|safe|truncatechars:100 }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
